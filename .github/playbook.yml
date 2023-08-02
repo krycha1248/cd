@@ -1,0 +1,44 @@
+- name: Deploy HTML
+  hosts: all
+  become: true
+  remote_user: krystian
+
+  vars_files:
+    - ./vars/secrets.yml
+
+  tasks:
+    - name: Change permissions
+      ansible.builtin.file:
+        path: /var/www/html
+        recurse: true
+        owner: root
+        group: root
+    - name: Remove old files
+      ansible.builtin.file:
+        path: /var/www/html/
+        state: absent
+    - name: Clone repo ci
+      ansible.builtin.git:
+        repo: https://github.com/krycha1248/cd.git
+        dest: /var/www/html
+        version: master
+        update: true
+        force: true
+    - name: Remove Readme, .git, .github file
+      ansible.builtin.file:
+        path: "/var/www/html/{{ item }}"
+        state: absent
+      with_items:
+        - "README.md"
+        - ".git"
+        - ".github"
+    - name: Change permissions
+      ansible.builtin.file:
+        path: /var/www/html
+        recurse: true
+        owner: www-data
+        group: www-data
+    - name: Show variable
+      ansible.builtin.debug:
+        msg: "Wartość zmiennej {{ var1 }}"
+...
