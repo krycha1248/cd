@@ -1,0 +1,43 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection" : "server=localhost;database={{ item.db_name }};user={{ item.username }};pwd={{ item.password}}"
+  },
+  "Authentication": {
+    "JwtKey" : "${JWTKEY}",
+    "JwtExpireDays" : 3,
+    "RefreshTokenExpireDays": 14,
+    "JwtIssuer" : "poopostingpl"
+  },
+  "AppSettings": {
+    "Origin": "https://{{ item.pooposting_domain }}//api"
+        "Origin2": "https://{{ item.pooposting_domain2 }}//api"
+            "Origin3": "https://{{ item.pooposting_domain3 }}//api"
+  },
+  "SitemapSettings": {
+    "Origin": "https://{{ item.pooposting_domain }}/",
+    "Sites": [
+      "#origin#/home",
+      "#origin#/search",
+      "#origin#/tos/rulebook",
+      "#origin#/auth/login",
+      "#origin#/auth/register"
+    ],
+    "PictureRoute": "#origin#/picture/#pictureId#",
+    "AccountRoute": "#origin#/account/#accountId#"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "HashIdsSettings": {
+    "MinHashLength": 8,
+    "HashAlphabet": "-_1234567890adfbdfbdfbsdopddfbdfbdfbdfIJKLMNOPQRSTUVWXYZ",
+    "PictureSalt": "mdWtsdfbsdfbdfbdfVvjwNXg",
+    "AccountSalt": "cX-osmNsdfbsdfbfdQxA",
+    "CommentSalt": "Wsdfbsdfbdfsbdfbggp8A"
+  },
+  "AllowedHosts": "*"
+}
